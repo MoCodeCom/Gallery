@@ -3,13 +3,22 @@ const router = express.Router();
 
 
 /****************************************************/
-const getController = require('../controllers/ImageController');
+const ImageController = require('../controllers/ImageController');
 
 /****************************************************/
+/* Get all data according to image id or specific image*/
+router.get('/getall', ImageController.getAll);
+router.get('/getbyid', ImageController.getById);
 
-router.get('/getall', getController.getAll);
-router.get('/getbyid',getController.getById);
 
+/**************************************************/
+/* Exist image */
+
+/* Add image */
+router.post('/add/image', ImageController.add_Image);
+
+/* Delete image */
+router.delete('/delete/image', ImageController.delete_Image);
 
 /**************************************************/
 module.exports = router;
