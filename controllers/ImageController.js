@@ -27,11 +27,13 @@ exports.getById = async(req, res, next)=>{
 
 
 exports.add_Image = async(req, res, next)=>{
-    const data = req.body.data;
-    await db.exist()
+    const data = req.body;
+    await db.add_Image(data.image_id, data.title, data.size, data.url, data.type, data.desc, null);
+    /*
+    return await db.exist()
     .then(async result =>{
         if(result[0].length === 0){
-            await db.add_Image(data[0], data[1], data[2], data[3], data[4], data[5], data[6])
+            await db.add_Image(data.image_id, data.title, data.size, data.url, data.type, data.desc, null)
             .then(result =>{
                 res.status(200).json({
                     message:'The image has been added.',
@@ -50,7 +52,7 @@ exports.add_Image = async(req, res, next)=>{
         res.status().json({
             message:'There is an error occured when added a new image.'
         });
-    })
+    });*/
     
 } 
 

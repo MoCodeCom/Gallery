@@ -16,7 +16,8 @@ module.exports = class allimages {
     }
 
     static exist(id){
-        const q = `SELECT * FROM appdb.images_table WHERE image_id = "${id}"`;
+        const q = `SELECT * FROM appdb.image_tbl WHERE image_id = "${id}"`;
+        console.log(q);
         return pool.query(q);
 
     }
@@ -35,13 +36,25 @@ module.exports = class allimages {
 
     static getbyid(imageId){
 
-        const q= `SELECT * FROM appdb.image_tbl WHERE imageId = '${imageId}';`;
+        const q= `SELECT * FROM appdb.image_tbl WHERE imageId = '${image_id}';`;
         return pool.query(q);
     }
 
     static add_Image(image_id, title, size, url, type, desc, other){
-        const q=`INSERT INTO appdb.image_tbl("image_id", "title", "size", "url", "type", "desc", "other") VALUES (${image_id}, ${title}, ${size}, ${url}, ${type}, ${desc}, ${other});`;
-        return pool.query(q);
+        //const q1=`SET SQL_SAFE_UPDATES = 0;`;
+        const qq = `INSERT INTO appdb.image_tbl ( image_id, title, size, url, type) VALUES ('${image_id}', '${title}', '${size}', '${url}', '${type}')`;
+        //const q=`INSERT INTO appdb.image_tbl (image_id, title, size, url, type, desc, other) VALUES ${image_id}, ${title}, ${size}, ${url}, ${type}, ${desc}, ${other};`;
+        //const q3=`SET SQL_SAFE_UPDATES = 1;`;
+        //return pool.query(q);
+        return pool.query(qq)
+        /*
+        .then(()=>{
+            pool.query(q2)
+            .then(()=>{
+                pool.query(q3);
+            }).catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))*/
     }
 
     static delete_Image(id){
